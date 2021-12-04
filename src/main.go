@@ -31,9 +31,9 @@ func main() {
 	// switch statement
 	switch os.Args[1] {
 	case "get": // if get command is used
-
+		HandleGet(getCmd, getAll, getID)
 	case "add": // if add command is used
-
+		HandleAdd(addCmd, addID, addTitle, addUrl, addImageUrl, addDesc)
 	default: // if input is not clear
 	}
 }
