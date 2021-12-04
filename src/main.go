@@ -30,15 +30,45 @@ func main() {
 
 	// switch statement
 	switch os.Args[1] {
-	case "get":
+	case "get": // if get command is used
 
-	case "add":
+	case "add": // if add command is used
 
-	default:
+	default: // if input is not clear
 	}
 }
 
 func HandleGet(getCmd *flag.FlagSet, all *bool, id *string) {
+
+	getCmd.Parse(os.Args[2:])
+
+	if *all == false && *id = "" {
+		fmt.Println("id is required or specify --all for all videos")
+		getCmd.PrintDefaults()
+		os.Exit(1)
+	}
+
+	if *all {
+		video := getVideos()
+
+		fmt.Printf()("ID \t Title \t URL \t ImageURL \t Description \n")
+		for _, video := range videos {
+			fmt.Printf("%v \t %v \t %v \t %v \t %v \n", video.Id, video.Title, video.Url, video.ImageURl, video.Description)
+		}
+	return
+	
+	}
+	if *id != "" {
+		videos := getVideos()
+		id := *id
+		for _, video := range videos {
+			if id == video.Id {
+				fmt.Printf("ID \t Title \t URL \t ImageURL \t Description \n")
+				fmt.Printf("%v \t %v \t %v \t %v \t %v \n",video.Id, video.Title, video.Url, video.Imageurl,video.Description)
+
+			}
+		}
+} 
 
 }
 
