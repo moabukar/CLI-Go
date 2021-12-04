@@ -27,6 +27,15 @@ func main() {
 		fmt.Println("exoected 'get' or 'add' subcommands")
 		os.Exit()
 	}
+
+	// switch statement
+	switch os.Args[1] {
+	case "get":
+
+	case "add":
+
+	default:
+	}
 }
 
 func HandleGet(getCmd *flag.FlagSet, all *bool, id *string) {
