@@ -28,3 +28,11 @@ func main() {
 		os.Exit()
 	}
 }
+
+func HandleGet(getCmd *flag.FlagSet, all *bool, id *string) {
+
+}
+
+func HandleAdd(addCmd *flag.FlagSet, id *string, title *string, url *string, imageurl *string, desc *string) {
+
+}
