@@ -73,5 +73,26 @@ func HandleGet(getCmd *flag.FlagSet, all *bool, id *string) {
 }
 
 func HandleAdd(addCmd *flag.FlagSet, id *string, title *string, url *string, imageurl *string, desc *string) {
+	ValidateVideo(addCmd, id,title,url, imageUrl, description)
 
+	video := video{
+		Id: *id,
+		Title: *title,
+		Description: *description,
+		Imageurl: *imageUrl, 
+		Url: *url, 
+	}
+
+	videos := getVideos()
+	videos = append(videos,video)
+
+	saveVideos(videos)
+}
+
+func ValidateVideo(addCmd *flag.FlagSet,id *string, title *string, url *string, imageUrl *string, description *string ){
+	if *id == "" || *title == "" || *url == "" || *imageUrl == "" || *description == "" {
+		fmt.Print("all fields are required for adding a video")
+		addCmd.PrintDefaults()
+		os.Exit(1)
+	}
 }
