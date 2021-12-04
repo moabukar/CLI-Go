@@ -2,6 +2,8 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"os"
 )
 
 func main() {
@@ -20,4 +22,9 @@ func main() {
 	addUrl := addCmd.String("Url", "", "Video URL")
 	addImageUrl := addCmd.String("iamge URL", "", "video image URL")
 	addDesc := addCmd.String("desc", "", "video description")
+
+	if len(os.Args) < 2 {
+		fmt.Println("exoected 'get' or 'add' subcommands")
+		os.Exit()
+	}
 }
