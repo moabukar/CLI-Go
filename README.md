@@ -4,10 +4,10 @@ Open to feedback :)
 
 ## Build docker dev environment
 
-'''sh
+```sh
 
 docker build --target dev . -t go
 docker run -it -v ${PWD}:/work go sh
 go version
 
-``` 
+```
