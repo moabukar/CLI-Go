@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 )
+
 type video struct {
 	Id          string
 	Title       string
@@ -12,33 +13,33 @@ type video struct {
 	Url         string
 }
 
-func getVideos()(video []video){
+func getVideos() (videos []video) {
 
-	fileBytes, err !: ioutil.ReadFile("./videos.json")
+	fileBytes, err := ioutil.ReadFile("./videos.json")
 
-	if err != nil {    //error handling here
+	if err != nil {
 		panic(err)
 	}
 
 	err = json.Unmarshal(fileBytes, &videos)
 
-	if err!= nil {
+	if err != nil {
 		panic(err)
 	}
 
 	return videos
 }
 
-func saveVideos()(video []video){
+func saveVideos(videos []video) {
 
 	videoBytes, err := json.Marshal(videos)
+	if err != nil {
+		panic(err)
+	}
 
+	err = ioutil.WriteFile("./videos.json", videoBytes, 0644)
 	if err != nil {
 		panic(err)
 	}
-	
-	err = ioutil.WriteFile("./videos.json",videoBytes,0644)
-	if err != nil {
-		panic(err)
-	}
+
 }

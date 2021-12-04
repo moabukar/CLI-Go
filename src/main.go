@@ -7,92 +7,102 @@ import (
 )
 
 func main() {
-	// subcommand = "videos get"
+
+	//'videos get' subcommand
 	getCmd := flag.NewFlagSet("get", flag.ExitOnError)
 
-	// subcommand for video get all & ID
+	// inputs for `videos get` command
 	getAll := getCmd.Bool("all", false, "Get all videos")
-	getID := getCmd.String("id", "", "Video ID")
+	getID := getCmd.String("id", "", "YouTube video ID")
 
+	//'videos add' subcommand
 	addCmd := flag.NewFlagSet("add", flag.ExitOnError)
 
-	//
-	addID := addCmd.String("id", "", "Video ID")
-	addTitle := addCmd.String("title", "", "Video Title")
-	addUrl := addCmd.String("Url", "", "Video URL")
-	addImageUrl := addCmd.String("iamge URL", "", "video image URL")
-	addDesc := addCmd.String("desc", "", "video description")
+	// inputs for `videos add` command
+	addID := addCmd.String("id", "", "YouTube video ID")
+	addTitle := addCmd.String("title", "", "YouTube video Title")
+	addUrl := addCmd.String("url", "", "YouTube video URL")
+	addImageUrl := addCmd.String("imageurl", "", "YouTube video Image URL")
+	addDesc := addCmd.String("desc", "", "YouTube video description")
 
 	if len(os.Args) < 2 {
-		fmt.Println("exoected 'get' or 'add' subcommands")
-		os.Exit()
+		fmt.Println("expected 'get' or 'add' subcommands")
+		os.Exit(1)
 	}
 
-	// switch statement
+	//look at the 2nd argument's value
 	switch os.Args[1] {
-	case "get": // if get command is used
+	case "get": // if its the 'get' command
 		HandleGet(getCmd, getAll, getID)
-	case "add": // if add command is used
+	case "add": // if its the 'add' command
 		HandleAdd(addCmd, addID, addTitle, addUrl, addImageUrl, addDesc)
-	default: // if input is not clear
+	default: // if we don't understand the input
 	}
+
 }
 
 func HandleGet(getCmd *flag.FlagSet, all *bool, id *string) {
 
 	getCmd.Parse(os.Args[2:])
 
-	if *all == false && *id = "" {
-		fmt.Println("id is required or specify --all for all videos")
+	if *all == false && *id == "" {
+		fmt.Print("id is required or specify --all for all videos")
 		getCmd.PrintDefaults()
 		os.Exit(1)
 	}
 
 	if *all {
-		video := getVideos()
+		//return all videos
+		videos := getVideos()
 
-		fmt.Printf()("ID \t Title \t URL \t ImageURL \t Description \n")
+		fmt.Printf("ID \t Title \t URL \t ImageURL \t Description \n")
 		for _, video := range videos {
-			fmt.Printf("%v \t %v \t %v \t %v \t %v \n", video.Id, video.Title, video.Url, video.ImageURl, video.Description)
+			fmt.Printf("%v \t %v \t %v \t %v \t %v \n", video.Id, video.Title, video.Url, video.Imageurl, video.Description)
 		}
-	return
-	
+
+		return
 	}
+
 	if *id != "" {
 		videos := getVideos()
 		id := *id
 		for _, video := range videos {
 			if id == video.Id {
 				fmt.Printf("ID \t Title \t URL \t ImageURL \t Description \n")
-				fmt.Printf("%v \t %v \t %v \t %v \t %v \n",video.Id, video.Title, video.Url, video.Imageurl,video.Description)
-
+				fmt.Printf("%v \t %v \t %v \t %v \t %v \n", video.Id, video.Title, video.Url, video.Imageurl, video.Description)
 			}
 		}
-} 
-
-}
-
-func HandleAdd(addCmd *flag.FlagSet, id *string, title *string, url *string, imageurl *string, desc *string) {
-	ValidateVideo(addCmd, id,title,url, imageUrl, description)
-
-	video := video{
-		Id: *id,
-		Title: *title,
-		Description: *description,
-		Imageurl: *imageUrl, 
-		Url: *url, 
 	}
 
-	videos := getVideos()
-	videos = append(videos,video)
-
-	saveVideos(videos)
 }
 
-func ValidateVideo(addCmd *flag.FlagSet,id *string, title *string, url *string, imageUrl *string, description *string ){
+func ValidateVideo(addCmd *flag.FlagSet, id *string, title *string, url *string, imageUrl *string, description *string) {
+
+	addCmd.Parse(os.Args[2:])
+
 	if *id == "" || *title == "" || *url == "" || *imageUrl == "" || *description == "" {
 		fmt.Print("all fields are required for adding a video")
 		addCmd.PrintDefaults()
 		os.Exit(1)
 	}
+
+}
+
+func HandleAdd(addCmd *flag.FlagSet, id *string, title *string, url *string, imageUrl *string, description *string) {
+
+	ValidateVideo(addCmd, id, title, url, imageUrl, description)
+
+	video := video{
+		Id:          *id,
+		Title:       *title,
+		Description: *description,
+		Imageurl:    *imageUrl,
+		Url:         *url,
+	}
+
+	videos := getVideos()
+	videos = append(videos, video)
+
+	saveVideos(videos)
+
 }
