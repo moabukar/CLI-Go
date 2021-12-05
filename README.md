@@ -12,7 +12,7 @@ go version
 
 ```
 
-## Test CLI using Docker dev env ((ensure you have Docker installed for this to work))
+## Test CLI using Docker dev env (ensure you have Docker installed for this to work)
 
 ```sh
 git clone https://github.com/moabukar/CLI-Go.git
