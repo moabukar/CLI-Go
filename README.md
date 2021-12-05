@@ -26,8 +26,8 @@ go build main.go
 
 ./videos get --all
 
+```
+
 | ID   |    Title |  URL  |   ImageURL    |    Description |
 | -----| --------- | -------- | ----- | ------ |
 | test  |   vidtitle  |      testurl    |     hello  | test |
-
-``` 
