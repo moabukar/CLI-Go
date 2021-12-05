@@ -12,7 +12,7 @@ go version
 
 ```
 
-## Test CLI
+## Test CLI using Docker dev env
 
 ```sh
 
@@ -31,3 +31,20 @@ go build main.go
 | ID   |    Title |  URL  |   ImageURL    |    Description |
 | -----| --------- | -------- | ----- | ------ |
 | test  |   vidtitle  |      testurl    |     hello  | test |
+
+
+## Test CLI using local Go build
+
+```sh
+
+git clone https://github.com/moabukar/CLI-Go.git
+cd src
+go build main.go
+
+./videos get --all (gets all videos)
+
+./videos add -id test -imageurl hello -title vidtitle -url testurl -desc test (adds an inout with all the flags)
+
+./videos get --all (returns all video lists added)
+
+```
