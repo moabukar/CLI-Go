@@ -20,7 +20,7 @@ docker run -it -v ${PWD}:/work go sh
 cd src
 go build main.go
 
-./videos get --all (gets all videos
+./videos get --all (gets all videos)
 
 ./videos add -id test -imageurl hello -title vidtitle -url testurl -desc test
 
@@ -29,5 +29,5 @@ go build main.go
 | ID   |    Title |  URL  |   ImageURL    |    Description |
 | -----| --------- | -------- | ----- | ------ |
 | test  |   vidtitle  |      testurl    |     hello  | test |
-)
+
 ``` 
