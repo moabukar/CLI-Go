@@ -19,14 +19,14 @@ func main() {
 	addCmd := flag.NewFlagSet("add", flag.ExitOnError)
 
 	// inputs for `videos add` command
-	addID := addCmd.String("id", "", "YouTube video ID")
-	addTitle := addCmd.String("title", "", "YouTube video Title")
-	addUrl := addCmd.String("url", "", "YouTube video URL")
-	addImageUrl := addCmd.String("imageurl", "", "YouTube video Image URL")
-	addDesc := addCmd.String("desc", "", "YouTube video description")
+	addID := addCmd.String("id", "", "video ID")
+	addTitle := addCmd.String("title", "", "video Title")
+	addUrl := addCmd.String("url", "", "video URL")
+	addImageUrl := addCmd.String("imageurl", "", "video Image URL")
+	addDesc := addCmd.String("desc", "", "video description")
 
 	if len(os.Args) < 2 {
-		fmt.Println("expected 'get' or 'add' subcommands")
+		fmt.Println("get or add commands required")
 		os.Exit(1)
 	}
 
@@ -36,7 +36,7 @@ func main() {
 		HandleGet(getCmd, getAll, getID)
 	case "add": // if its the 'add' command
 		HandleAdd(addCmd, addID, addTitle, addUrl, addImageUrl, addDesc)
-	default: // if we don't understand the input
+	default: // input not clear
 	}
 
 }
@@ -46,7 +46,7 @@ func HandleGet(getCmd *flag.FlagSet, all *bool, id *string) {
 	getCmd.Parse(os.Args[2:])
 
 	if *all == false && *id == "" {
-		fmt.Print("id is required or specify --all for all videos")
+		fmt.Print("required id value or specify --all for all videos")
 		getCmd.PrintDefaults()
 		os.Exit(1)
 	}
