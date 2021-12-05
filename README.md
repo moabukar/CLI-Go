@@ -12,12 +12,15 @@ go version
 
 ```
 
-## Test CLI using Docker dev env
+## Test CLI using Docker dev env ((ensure you have Docker installed for this to work))
 
 ```sh
+git clone https://github.com/moabukar/CLI-Go.git
 
 docker run -it -v ${PWD}:/work go sh
+
 cd src
+
 go build main.go
 
 ./videos get --all (gets all videos)
@@ -39,11 +42,12 @@ go build main.go
 
 git clone https://github.com/moabukar/CLI-Go.git
 cd src
+
 go build main.go
 
 ./videos get --all (gets all videos)
 
-./videos add -id test -imageurl hello -title vidtitle -url testurl -desc test (adds an inout with all the flags)
+./videos add -id test -imageurl hello -title vidtitle -url testurl -desc test (adds an input with all the flags)
 
 ./videos get --all (returns all video lists added)
 
